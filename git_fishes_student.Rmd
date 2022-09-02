@@ -92,10 +92,11 @@ Make sure you have added a `data/` folder to your working directory that you jus
 Write your answer in the code chunk below:
 
 ```{r, loaddata, eval = FALSE, echo=TRUE}
-
-path <- "replace this text with your relative path to a file in the 'data/' folder"
+library(tidyverse)
+path <- "data/OA_activitydat_20190302_BIOL3207.csv"
   
 data <- read_csv(path)
+data
 
 ```
 
@@ -105,7 +106,7 @@ Let's say that you added a new data folder that was inside an output folder (i.e
 
 ```{r, write, eval = FALSE, echo=TRUE}
 
-path <- "replace this text with your relative path"
+path <- "output/data/fish"
 
 write_csv(data, file = path)
 
@@ -120,7 +121,7 @@ First, write some code below to remove missing data
 
 ```{r, rmMiss}
 # Code to removing missing data from the `OA_activitydat_20190302_BIOL3207.csv` data frame. 
-
+is.na()
 ```
 
 Second, drop out irrelevant columns and check that there are no spelling issues in `species` and `treatment`. Create a table of summary data that includes: 1) the mean, 2) the standard error and 3) the sample sizes of unique fish across ALL six fish species for each treatment. This will also help you detect any spelling errors. You can use the R package [`flextable`](https://ardata-fr.github.io/flextable-book/) to print out the results in a nice neat format! If you haven't heard about `flextable` spend 10 or so minutes having a look at it's functionality. It's incredible! You'll use this for tables throughout.
