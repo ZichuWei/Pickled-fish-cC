@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 options(digits=2)
 ```
 
-# **Introduction** hello zichu
+# **Introduction** hello zichu wei
 
 This tutorial will draw on the skills you have already learnt on data visualisation, data wrangling and NHST to analyse a data set on ocean acidification effects on fish behaviour. However, we'll do that in the context of some new workflows that adopt Git and GitHub. 
 
