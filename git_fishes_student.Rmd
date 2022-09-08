@@ -51,9 +51,12 @@ This task involves cloning your repository on your computer. Where should we pla
 
 >**Question 1**: Why should you not rely on *GitHub* as a backup?
 
-```{r, answer1, echo=TRUE, eval = FALSE}
+```{r, answer1, echo=TRUE, eval = TRUE}
 
-## Write your answer here. 
+## 1. After the files in "GitHub" are modified on the computer, they must be uploaded from "GitHub Desktop" before they can be displayed in the account.
+## 2. GitHub can support a limited number of backup formats, often you need to change and convert the format.
+## 3. GitHub's private repository limits the number of collaborators (people who can participate in modifications), often allowing only three.
+## 4. While GitHub's public repository is free and unlimited, the closed private repository is only available for users with advanced accounts, and the price is prohibitively high, which is not very convenient as a private backup tool.
 
 ```
 
@@ -63,8 +66,8 @@ Before moving on you might have noticed that the code block above has a name `an
 
 >**Question 2**: In the second code block called `answer1` if we change echo = TRUE to echo = FALSE what will happen to the code block `answer1` when you render it?
 
-```{r answer2, echo=TRUE, eval = FALSE}
-# Write your answer here
+```{r answer2, echo=TRUE, eval = TRUE}
+# If we change echo = TRUE to echo = FALSE, when knit, the code block will be hidden and will not display its contents.
 ```
 
 **Important**: Notice that `eval = FALSE` for many code chunks. When you complete the tasks. Make sure to change these to `TRUE` otherwise you will find your code does not run!
@@ -73,11 +76,6 @@ Before moving on you might have noticed that the code block above has a name `an
 
 Hopefully you have now successfully cloned down your *GitHub* repo. This is your new working directory from which your project will develop. 
 
-Hopefully you also created and/or downloaded the following files and added them to your cloned repo:
-
-1) created a new RStudio project file in your working directory
-2) download the `OA_activitydat_20190302_BIOL3207.csv` from Wattle and add this to a `data/` folder in your repo 
-3) Add the template Rmarkdown file, `git_fishes_student.Rmd` that was provided on wattle. You'll use this file to work through the tasks and answer questions. 
 
 **STOP**: Before moving on, it's a good time to establish some good *GitHub* practices. You have just did an important step -- you added a bunch of new files. It's time stage these files and commit them so that you have a record. Use *GitHub Desktop* to do this. 
 
@@ -91,7 +89,7 @@ Make sure you have added a `data/` folder to your working directory that you jus
 
 Write your answer in the code chunk below:
 
-```{r, loaddata, eval = FALSE, echo=TRUE}
+```{r, loaddata, eval = TRUE, echo=TRUE}
 library(tidyverse)
 path <- "data/OA_activitydat_20190302_BIOL3207.csv"
   
@@ -104,7 +102,7 @@ Let's say that you added a new data folder that was inside an output folder (i.e
 
 >**Question 4**: Using the `write_csv` function how would you write the path name to save this file to `output/data`?
 
-```{r, write, eval = FALSE, echo=TRUE}
+```{r, write, eval = TRUE, echo=TRUE}
 
 path <- "output/data/fish"
 
@@ -130,11 +128,16 @@ Second, drop out irrelevant columns and check that there are no spelling issues 
 ```{r summaryTab}
 # Drop irrelevant columns
 library(dplyr)
+# install.packages('plotrix')
+library(plotrix)
 data_clean <- select(data_eff,-c(loc,comment))
 data_clean
 # Check spelling in species and treatment but also generate a summary table
-data_complete <- data_clean %>% filter(species == c("acantho","ambon","chromis","humbug","lemon"))
+data_complete <- data_clean %>% filter(species != "whitedams") %>% group_by(species,treatment) %>% summarise(mean_activity = mean(activity), mean_sl = mean(sl), sd_error_activity = std.error(activity),sd_error_sl = std.error(sl))
 # Use flextable to render the summary table in a tidy format
+set_flextable_defaults(font.size = 10, theme_fun = theme_vanilla,
+  padding = 6,
+  background.color = "#EFEFEF")
 flextable(data_complete)
 ```
 
@@ -155,8 +158,8 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 ```{r, prettyfig, fig.align='center', fig.cap="add a legend here"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
-ggplot(data, mapping = aes(x=treatment, y = activity)) +
-  geom_point(aes(color=treatment))+facet_wrap(~species)
+ggplot(data_complete, mapping = aes(x=treatment, y = mean_activity)) +
+  geom_point(aes(color=species))
 
 ```
 
@@ -183,6 +186,7 @@ Last question for this task. I promise! It's important to think very carefully a
 
 ```{r, answer6}
 ## Add your answer here
+## 用同样的图片，如果不添加进去，另一个人无法利用同样的内容去画图（可能使用其他的图片）。
 ```
 
 # **Task 6**
