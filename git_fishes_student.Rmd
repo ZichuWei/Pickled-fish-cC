@@ -95,7 +95,6 @@ path <- "data/OA_activitydat_20190302_BIOL3207.csv"
   
 data <- read_csv(path)
 data
-
 ```
 
 Let's say that you added a new data folder that was inside an output folder (i.e., `output/data`) to your working directory. The purpose of this folder is to store and track your cleaned up data frame after you have done all your data wrangling and corrections. 
@@ -128,21 +127,16 @@ Second, drop out irrelevant columns and check that there are no spelling issues 
 ```{r summaryTab}
 # Drop irrelevant columns
 library(dplyr)
-<<<<<<< Updated upstream
 # install.packages('plotrix')
 library(plotrix)
 data_clean <- select(data_eff,-c(loc,comment))
 data_clean
-=======
-select(data_eff,-loc)
->>>>>>> Stashed changes
 # Check spelling in species and treatment but also generate a summary table
 ## Dear teacher, sorry that there are two ways of thinking about this problem, because different explanations have been obtained from different teachers, then I will answer the question according to different explanations:
 ### First meaning: According to the "version_control_github_instruction.html" file given, there are only five species names in the species list, with "Whitedams" missing, so we assume that the spelling error here refers to an additional species.
 data_remove <- data_clean %>% filter(species != "whitedams") 
 data_complete <- data_remove %>% group_by(species,treatment) %>% summarize(mean_activity = mean(activity), mean_sl = mean(sl), sd_error_activity = std.error(activity),sd_error_sl = std.error(sl),number = length(species))
 # Use flextable to render the summary table in a tidy format
-<<<<<<< Updated upstream
 set_flextable_defaults(font.size = 10, theme_fun = theme_vanilla,
   padding = 6,background.color = "#E6C5B4")
 flextable(data_complete)
@@ -154,9 +148,6 @@ data_check <- data_clean %>% group_by(species,treatment) %>% summarize(mean_acti
 set_flextable_defaults(font.size = 10, theme_fun = theme_vanilla,
   padding = 6,background.color = "#94B3B8")
 flextable(data_check)
-=======
-flextable()
->>>>>>> Stashed changes
 ```
 
 **STOP**: Before moving on, it's a good time to establish some good *GitHub* practices. You have just done an important step. It's time to save this file, stage it and commit it so that you have a record. Push these changes up using *GitHub Desktop*. It's important to do this frequently. It's probably not needed after every line of code, but it's good to do this when you have completed an important coding step. Of course, there's no harm in doing it more often. It will provide fine-scale tracking for you!
