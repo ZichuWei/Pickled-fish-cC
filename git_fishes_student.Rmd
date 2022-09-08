@@ -119,7 +119,7 @@ First, write some code below to remove missing data
 
 ```{r, rmMiss}
 # Code to removing missing data from the `OA_activitydat_20190302_BIOL3207.csv` data frame. 
-data_eff <- data %>% filter(!is.na(data))
+data_eff <- data %>% filter(!is.na(activity))
 data_eff
 ```
 
@@ -133,19 +133,30 @@ library(plotrix)
 data_clean <- select(data_eff,-c(loc,comment))
 data_clean
 # Check spelling in species and treatment but also generate a summary table
-data_complete <- data_clean %>% filter(species != "whitedams") %>% group_by(species,treatment) %>% summarise(mean_activity = mean(activity), mean_sl = mean(sl), sd_error_activity = std.error(activity),sd_error_sl = std.error(sl))
+## Dear teacher, sorry that there are two ways of thinking about this problem, because different explanations have been obtained from different teachers, then I will answer the question according to different explanations:
+### First meaning: According to the "version_control_github_instruction.html" file given, there are only five species names in the species list, with "Whitedams" missing, so we assume that the spelling error here refers to an additional species.
+data_remove <- data_clean %>% filter(species != "whitedams") 
+data_complete <- data_remove %>% group_by(species,treatment) %>% summarize(mean_activity = mean(activity), mean_sl = mean(sl), sd_error_activity = std.error(activity),sd_error_sl = std.error(sl),number = length(species))
 # Use flextable to render the summary table in a tidy format
 set_flextable_defaults(font.size = 10, theme_fun = theme_vanilla,
-  padding = 6,
-  background.color = "#EFEFEF")
+  padding = 6,background.color = "#E6C5B4")
 flextable(data_complete)
+
+### Second meaning: The question is directly understood as a spelling error, so we need to compare the given abbreviations with the species names in the table. We can compare directly from visual inspection, or we can use the following code:
+data_clean$species %>% unique()
+### According to the code, we can find there are only six groups, and these names are the same with the given abbreviations, so there is no spelling error.
+data_check <- data_clean %>% group_by(species,treatment) %>% summarize(mean_activity = mean(activity), mean_sl = mean(sl), sd_error_activity = std.error(activity),sd_error_sl = std.error(sl),number = length(species))
+set_flextable_defaults(font.size = 10, theme_fun = theme_vanilla,
+  padding = 6,background.color = "#94B3B8")
+flextable(data_check)
 ```
 
 **STOP**: Before moving on, it's a good time to establish some good *GitHub* practices. You have just done an important step. It's time to save this file, stage it and commit it so that you have a record. Push these changes up using *GitHub Desktop*. It's important to do this frequently. It's probably not needed after every line of code, but it's good to do this when you have completed an important coding step. Of course, there's no harm in doing it more often. It will provide fine-scale tracking for you!
 
 >**Question 5**: The new version of your Rmarkdown file should now be up on *GitHub*. In the browser window click on your most recent commit. Have a look at the file versioning system. You will notice two files side-by-side. Describe what you notice is being presented online. What do the red and green highlights mean?
 
-```{r answer5, echo=TRUE, eval=FALSE}
+```{r answer5, echo=TRUE, eval=TRUE}
+# We can see online that the previous line in the file is marked in red, indicating the original code. The next line is marked in green, indicating the modified code. At the same time, the webpage will mark the amount of additions and deletions of the changed files.
 ## Red means the original code, unchanged code content.
 ## Green means the new code, the changed code content.
 ```
@@ -158,8 +169,12 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 ```{r, prettyfig, fig.align='center', fig.cap="add a legend here"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
-ggplot(data_complete, mapping = aes(x=treatment, y = mean_activity)) +
+## point plot:
+ggplot(data_check, mapping = aes(x=treatment, y = mean_activity)) +
   geom_point(aes(color=species))
+## boxplot:
+ggplot(data_clean, mapping = aes(x=treatment, y = activity)) +
+  geom_boxplot(aes(color=treatment))+facet_wrap(~species)
 
 ```
 
@@ -171,7 +186,7 @@ Now that you have the figure you may also want to write / save it as a separate 
 
 ```{r, savefig}
 # Use ggsave to save the figure
-ggsave()
+ggsave(file = "")
 ```
 
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
