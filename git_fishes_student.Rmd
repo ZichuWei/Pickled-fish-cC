@@ -169,12 +169,15 @@ Ignoring figures can be important because they take up quite a lot of space in y
 
 ```{r, prettyfig, fig.align='center', fig.cap="add a legend here"}
 # ggplot figure showing mean activity for each treatment (Control, OA) for each species.
-## point plot:
+## Scatter plot: Plot the scatter plot directly with the average activity.
 ggplot(data_check, mapping = aes(x=treatment, y = mean_activity)) +
   geom_point(aes(color=species))
-## boxplot:
+## Multifaceted boxplot:
 ggplot(data_clean, mapping = aes(x=treatment, y = activity)) +
-  geom_boxplot(aes(color=treatment))+facet_wrap(~species)
+  geom_boxplot(aes(color=treatment)) + geom_jitter(aes(color=treatment)) + facet_wrap(~species)
+## Overall boxplot:
+ggplot(data_clean, mapping = aes(x=species, y = activity)) +
+  geom_boxplot(aes(color=treatment)) + geom_jitter(aes(color=treatment))
 
 ```
 
@@ -185,8 +188,18 @@ Note the code chunk used to make the figure. It has a `fig.cap` argument. That m
 Now that you have the figure you may also want to write / save it as a separate file. Use `ggsave` function to save the figure(s) to your new `output/figures/`:
 
 ```{r, savefig}
-# Use ggsave to save the figure
-ggsave(file = "")
+# Insert the "pics/" picture:
+pics1 <- readPNG("./pics/acantho.png")
+pics2 <- readPNG("./pics/ambon.png")
+pics3 <- readPNG("./pics/chromis.png") 
+pics4 <- readPNG("./pics/humbug.png")
+pics5 <- readPNG("./pics/lemon.png")
+pics6 <- readPNG("./pics/whitedams.png")
+ggplot(data_clean, mapping = aes(x=species, y = activity)) +
+  geom_boxplot(aes(color=treatment)) + geom_jitter(aes(color=treatment)) + annotation_raster(pics1,0.5, 1.5, 0, 10, interpolate = FALSE) + annotation_raster(pics2, 1.5, 2.5, 45, 55, interpolate = FALSE) + annotation_raster(pics3, 2.5, 3.5, 46, 56, interpolate = FALSE) + annotation_raster(pics4, 3.5, 4.5, 3, 13, interpolate = FALSE) + annotation_raster(pics5, 4.5, 5.5, 48, 58, interpolate = FALSE) + annotation_raster(pics6, 5.5, 6.5, 49, 59, interpolate = FALSE)
+
+# Use ggsave to save the figure:
+ggsave("output/figures/mean_activity.png")
 ```
 
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
