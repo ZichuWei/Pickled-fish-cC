@@ -204,7 +204,7 @@ ggsave("output/figures/mean_activity.png")
 >**Question 6**: Given that you have added `output/figures/` to your `.gitignore` file describe what you notice about what you see in *GitHub Desktop*. 
 
 ```{r}
-## Write your answer here
+## "Changes" on "GitHub Desktop" will show that we have added a PNG image named mean_activity to the Output /figures/ folder. We can see a green plus sign next to the changes. And click on it to see the "add" character on the image.
 ```
 
 Last question for this task. I promise! It's important to think very carefully about what you track and ignore.
@@ -223,6 +223,8 @@ Now, lets create a new figure in the code block below that simplifies the one pr
 
 ```{r, collabFig, echo=TRUE, eval=TRUE}
 # You want to make changes to your collaborators figure in Task 5. Maybe you want to create a figure that focuses only on three fish species instead of the 5. More specifically, chromis, lemon, and acantho. Add code here to revise their figure to do that.
+ggplot(data_clean %>% filter(species == c("chromis","lemon","acantho")), mapping = aes(x=species, y = activity)) +
+  geom_boxplot(aes(color=treatment)) + geom_jitter(aes(color=treatment))
 ```
 
 
@@ -258,11 +260,58 @@ Here, run some statistical tests to determine, for each species, whether the con
 >**Stretch Task**: You can of course do this for each species seperately, but those who want a challenge, think about how you might use a loop or even some wrangling methods you have already learnt from the tidyverse to run these tests across all 6 species in a single block of code. If you're familiar with functions, you can even think about writing your own function! All these strategies will avoid having to copy and paste large chunks of code. If you're repeating anything, writing functions and loops are good ways to simplify.
 
 ```{r, stats, echo=TRUE, eval=TRUE}
-# Add your code here
+# ambon species:
+ambon_control <- data_clean %>% filter(species == "ambon") %>% filter(treatment == "control")
+ambon_CO2 <- data_clean %>% filter(species == "ambon") %>% filter(treatment == "CO2")
+t.test(ambon_control$sl,ambon_CO2$sl)
+t.test(ambon_control$activity,ambon_CO2$activity)
 ```
+
+```{r, stats, echo=TRUE, eval=TRUE}
+# chromis species:
+chromis_control <- data_clean %>% filter(species == "chromis") %>% filter(treatment == "control")
+chromis_CO2 <- data_clean %>% filter(species == "chromis") %>% filter(treatment == "CO2")
+t.test(chromis_control$sl,chromis_CO2$sl)
+t.test(chromis_control$activity,chromis_CO2$activity)
+```
+
+```{r, stats, echo=TRUE, eval=TRUE}
+# acantho species:
+acantho_control <- data_clean %>% filter(species == "acantho") %>% filter(treatment == "control")
+acantho_CO2 <- data_clean %>% filter(species == "acantho") %>% filter(treatment == "CO2")
+t.test(acantho_control$sl,acantho_CO2$sl)
+t.test(acantho_control$activity,acantho_CO2$activity)
+```
+
+```{r, stats, echo=TRUE, eval=TRUE}
+# humbug species:
+humbug_control <- data_clean %>% filter(species == "humbug") %>% filter(treatment == "control")
+humbug_CO2 <- data_clean %>% filter(species == "humbug") %>% filter(treatment == "CO2")
+t.test(humbug_control$sl,humbug_CO2$sl)
+t.test(humbug_control$activity,humbug_CO2$activity)
+```
+
+```{r, stats, echo=TRUE, eval=TRUE}
+# lemon species:
+lemon_control <- data_clean %>% filter(species == "lemon") %>% filter(treatment == "control")
+lemon_CO2 <- data_clean %>% filter(species == "lemon") %>% filter(treatment == "CO2")
+t.test(lemon_control$sl,lemon_CO2$sl)
+t.test(lemon_control$activity,lemon_CO2$activity)
+```
+
+```{r, stats, echo=TRUE, eval=TRUE}
+# whitedams species:
+whitedams_control <- data_clean %>% filter(species == "whitedams") %>% filter(treatment == "control")
+whitedams_CO2 <- data_clean %>% filter(species == "whitedams") %>% filter(treatment == "CO2")
+t.test(whitedams_control$sl,whitedams_CO2$sl)
+t.test(whitedams_control$activity,whitedams_CO2$activity)
+```
+
+
 
 ```{r, table1, echo=TRUE, eval=TRUE, tab.cap = "write a caption here"}
 # Using the resulting object created above, which should be a table with all the summary statistics, t, df and p-value for each species create a table. Note that there is a tab.cap argument in the chunk arguments. Write a caption here. 
+table()
 ```
 
 Now that you have a table, you can reference it within a document. For example, you can make a call to Table \@ref(tab:table1) by referring to the name of the code chunk. When you knit the html it will create a hyperlink to your table and insert a legend above the table for you. How cool is that!?
