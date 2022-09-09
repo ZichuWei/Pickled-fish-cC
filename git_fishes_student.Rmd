@@ -240,6 +240,18 @@ This task involves creating and resolving conflicts. Conflicts in files are deno
   THIS IS YOUR PARTNERS CODE
   
  !>>>>>>>>928731027301723
+ 
+
+```{r}
+# My collaborator and I opened my README file at the same time, and then changed the title, I changed it to stove-FISH-CC-cc, she changed it to stove-FISH-CC-cc, and we saved the file at the same time. On GitHub Desktop, the changes will be commit to main, but when pushing Origin, a dialog box will pop up, showing that there is a conflict and asking us to resolve the conflict, that is, change to the same content. At this point we can see the respective changes in the new README file. When re-changed to the same content, the conflict is displayed as resolved, and the upload can continue.
+```
+
+<<<<<<< HEAD
+# Pickled-fish-cc-cc
+=======
+# Pickled-fish-cc-CC
+>>>>>>> ceffd6008c370dad8e5d3ae24725efabd2cb0bca
+
 
 Resolving is easy. Decide on what changes you think are the best to proceed with and remove conflict markers. 
 
