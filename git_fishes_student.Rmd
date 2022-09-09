@@ -243,7 +243,7 @@ This task involves creating and resolving conflicts. Conflicts in files are deno
  
 
 ```{r}
-# My collaborator and I opened my README file at the same time, and then changed the title, I changed it to stove-FISH-CC-cc, she changed it to stove-FISH-CC-cc, and we saved the file at the same time. On GitHub Desktop, the changes will be commit to main, but when pushing Origin, a dialog box will pop up, showing that there is a conflict and asking us to resolve the conflict, that is, change to the same content. At this point we can see the respective changes in the new README file. When re-changed to the same content, the conflict is displayed as resolved, and the upload can continue.
+# My collaborator and I opened my README file at the same time, and then changed the title, I changed it to "Pickled-fish-cc-cc", she changed it to "Pickled-fish-cc-CC", and we saved the file at the same time. On GitHub Desktop, the changes will be "commit to main", but when using "pull origin", a dialog box will pop up, showing that there is a conflict and asking us to resolve the conflict, that is, change to the same content. At this point we can see the respective changes in the new README file. When re-changed to the same content, the conflict is displayed as resolved, and the upload can continue.
 ```
 
 <<<<<<< HEAD
@@ -262,6 +262,11 @@ Once you have figured out how to create and solve conflicts it's time to update 
 **Task**: Provide details about the workflow (i.e., which files are used, when and why) and write a detailed description of the data file used. Include the details about what the column means and which data file someone should use. 
 
 Think about what you would need to know to make sure you can replicate a study. Provide these details so they are easy to find on the README.
+
+```{r}
+# README CONTENT:
+# 
+```
 
 # **Task 8**
 There's not too much to do in this task on the coding front! You just need to create a *GitHub* issue and create a 'To Do' list on *GitHub* for you and your collaborator. 
