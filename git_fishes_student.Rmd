@@ -1,7 +1,7 @@
 ---
 title: "Git, GitHub & Ocean Acidification"
 author: "Zichu Wei u7457435"
-date: "`r Sys.Date()`"
+date: "09/09/2022"
 output: 
   bookdown::html_document2:
     code_folding: show
@@ -212,8 +212,7 @@ Last question for this task. I promise! It's important to think very carefully a
 >**Question 7**: Assume that you added the `pics/` folder to your working directory to plot pictures of each fish on your figure. Do you want to track the files in the pic/ folder on GitHub despite them being .png files? Explain your reasoning. 
 
 ```{r, answer6}
-## Add your answer here
-## 用同样的图片，如果不添加进去，另一个人无法利用同样的内容去画图（可能使用其他的图片）。
+## Since we need the six images in the "Pics" folder to draw, we need to upload the "Pics" folder to GitHub and track it down to help the founders and collaborators do code analysis and get the same images and analysis results. Without tracking changes to this folder, you cannot have the same picture for creators and collaborators, and you cannot synchronize the results.
 ```
 
 # **Task 6**
@@ -265,11 +264,25 @@ Think about what you would need to know to make sure you can replicate a study. 
 
 ```{r}
 # README CONTENT:
-# 
+## The name of the repository is "Pickled-fish-cC", and it is a public repository containing three folders and four documents in different formats.
+## The folder named "Data" is used to store the experimental data to help with data analysis, and there is a CSV file named "Oa_activityDAT_20190302_Biol3207.CSV" for Rmarkdown to write programs.
+## The folder named "Output" is used for store and track your cleaned up data frame after you have done all your data wrangling and corrections, Here we have two files: "Data" and "figures". "Data" is mainly used to store and track data, and "figures" is mainly used to store and track images.
+## The folder named "PICS" contains pictures of fish of six species for plotting pictures of each Fish on Your Figure to help present the data.
+## ".gitignore" documents used to control what * Git * tracks and what it ignores, including the need to track the document path.
+## The document named "Pickled- FISH-CC # Pickled- FISH-CC.Rproj" is our own R project created for reuse and sharing, to help manage their own project, easy to find and read, to ensure the standardization of the project.
+## A document called "README. md" is a description of a project that usually contains a description of the content and precautions for use. It is usually a plain text file.
+## The document named "git_fishes_student.rmd" is a Rmarkdown format file, which combines R code with documents, images, etc., to facilitate data exploration and analysis.
 ```
 
 # **Task 8**
 There's not too much to do in this task on the coding front! You just need to create a *GitHub* issue and create a 'To Do' list on *GitHub* for you and your collaborator. 
+
+```{r}
+# To do list - cC
+## Test experimental results：χ2 test - @XiaowenChen0819
+## Assessment of model importance: F-tests - @ZichuWei
+## Find more data - @XiaowenChen0819 @ZichuWei
+```
 
 # **Task 9**
 Here, run some statistical tests to determine, for each species, whether the control vs high $CO^2$ treatments differ significantly from each other and in what direction. Provide the difference in means, their 95% confidence intervals, t-statistic, df and p-value. 
