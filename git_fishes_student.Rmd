@@ -342,7 +342,17 @@ Now that you have a table, you can reference it within a document. For example, 
 
 > **Question 8**: Pick one of your favorite species and write about the results to a reader. Write in the Rmarkdown file below what 1) the means and mean differences between control and acidification treatment is along with 2) the 95% confidence intervals of the difference
 
-You can write your blurb below this. Before you do that, a few cool features of Rmarkdown. You can actually code in objects so that, when they are rendered they replace the inline code chunk with the result. To give you an example, an inline code chunk is written as follows: `r "add code here"`. When you render the document, whatever you place in the "add code here" section will be rendered. In this case, we are giving a string, so it simply just adds that in the place where the code is, render and see for yourself.  
+```{r}
+# The selected species is humbug (Dascyllus aruanus):
+humbug_ac_t <- t.test(humbug_control$activity,humbug_CO2$activity)
+humbug_ac_t
+humbug_ac_t$conf.int
+# Based on the TTEST results, we can conclude that
+## (1) The means of control is 36, the means of acidification treatment is 40, the mean differences between control and acidification treatment is 4.
+## (2) The 95% confidence intervals of the difference is [-8.40,0.29].
+```
+
+You can write your blurb above this. Before you do that, a few cool features of Rmarkdown. You can actually code in objects so that, when they are rendered they replace the inline code chunk with the result. To give you an example, an inline code chunk is written as follows: `r "add code here"`. When you render the document, whatever you place in the "add code here" section will be rendered. In this case, we are giving a string, so it simply just adds that in the place where the code is, render and see for yourself.  
 
 Moving forward on that you can also add in an object and whatever that objects value is will also be spit out. For example, consider the following: `r x = 10; x`. What will happen? Well, it will place in the value 10 when rendered. Again, if you don't believe me, check for yourself by rendering the document. 
 
@@ -353,13 +363,17 @@ Mean activity for `r "species name here"` in the control group was `r "add code 
 Now, using what you just learnt, describe what the null hypothesis being tested was and provide statistical evidence (t-statistic, df, and p-value) to support your conclusion about whether we can reject the null hypothesis. Again, make sure you use in-line code. Write you answer below:
 
 **Write your answer here**
+```{r}
+# The null hypothesis: For species Humbug (Dascyllus aruanus), there was no significant difference between control and high $CO^2$ treatment, that is, between control and acidification treatment.
 
+# According to the above code and table, we conclude that the t-statistic is 2, df is 137, and p-value is 0.07. Since p-value is greater than 0.05, we preliminarily believe that the null hypothesis is accepted, that is, there is no significant difference. However, due to the small numerical difference between 0.05 and 0.07, we cannot completely conclude that the hypothesis is accepted.
+```
 
 Re-analyse the data for a single species using permutations instead of a t-test. Do your results differ?
 
 >**Stretch Task**:  If you really want a challenge try doing permutation tests for each species. Again, loops, functions or tidyverse (or even combinations might help). 
 
-```{r, stretch2, echo=TRUE, eval=FALSE}
+```{r, stretch2, echo=TRUE, eval=TRUE}
 # Add your code here.
 ```
 
